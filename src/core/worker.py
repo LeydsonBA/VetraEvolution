@@ -1,38 +1,50 @@
 import json
 import logging
-import os
+import boto3
+from boto3.dynamodb.types import TypeDeserializer
 
+# --- CONFIGURAÇÃO DA INFRAESTRUTURA ---
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+# Ferramenta de Limpeza (Tradutor Técnico: DynamoDB JSON -> Python Dict)
+deserializer = TypeDeserializer()
+
+def unmarshall_dynamo_json(dynamo_json):
+    """
+    Função de Infraestrutura:
+    Remove a formatação técnica do DynamoDB ({'S': 'Valor'}) 
+    e entrega o dado limpo para o sistema ('Valor').
+    """
+    return {k: deserializer.deserialize(v) for k, v in dynamo_json.items()}
+
 def worker_handler(event, context):
     """
-    Worker AI: Acionado pelo DynamoDB Stream.
-    Processa a lógica pesada (GPT-5, Llama, etc) de forma assíncrona.
+    Worker Estrutural: 
+    1. Recebe o evento do Stream.
+    2. Limpa o JSON técnico.
+    3. Disponibiliza o dado limpo para uso futuro.
     """
     try:
-        logger.info(f"WORKER ACORDADO! Eventos a processar: {len(event['Records'])}")
-
         for record in event['Records']:
-            # Só nos interessa quando algo NOVO é inserido (INSERT)
+            # Apenas processa inserções de novos dados
             if record['eventName'] == 'INSERT':
                 
-                # O DynamoDB envia os dados em um formato estranho chamado 'Marshalled JSON'
-                # Ex: {'S': 'Ola Vetra'} ao invés de 'Ola Vetra'
-                new_image = record['dynamodb']['NewImage']
+                # 1. A LIMPEZA (O passo estrutural vital)
+                raw_data = record['dynamodb']['NewImage']
+                clean_data = unmarshall_dynamo_json(raw_data)
                 
-                logger.info(f"PROCESSANDO MENSAGEM: {json.dumps(new_image)}")
-                
-                # --- AQUI ENTRARÁ A LÓGICA DO GPT-5 FUTURAMENTE ---
-                # 1. Identificar Cliente
-                # 2. Carregar Contexto
-                # 3. Chamar API OpenAI
-                # 4. Enviar Resposta de volta ao Telegram/Discord
-                # --------------------------------------------------
-                
-                logger.info("IA PROCESSADA COM SUCESSO (Simulação)")
+                # 2. Confirmação de Integridade
+                # Aqui o sistema prova que entendeu o dado, sem agir sobre ele.
+                logger.info(f"DADO LIMPO E ESTRUTURADO: {json.dumps(clean_data)}")
+
+                # --- PONTO DE EXTENSÃO FUTURA ---
+                # O ambiente está pronto. Quando você criar as configurações de IA
+                # no banco, a lógica de leitura será inserida aqui.
+                # --------------------------------
 
     except Exception as e:
-        logger.error(f"ERRO NO WORKER: {str(e)}")
-        # Em produção, jogaríamos isso para uma fila de 'Dead Letter' (DLQ)
-        raise e
+        logger.error(f"ERRO ESTRUTURAL NO WORKER: {str(e)}")
+        # Não damos 'raise' aqui para não travar o stream em caso de lixo de dados,
+        # apenas logamos o erro estrutural.
+        return {"status": "error", "message": str(e)}
