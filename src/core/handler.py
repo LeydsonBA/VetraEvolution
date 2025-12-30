@@ -1,3 +1,11 @@
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - CORE LOGIC
+# Arquivo: src/core/handler.py
+# Versão: 1.0 (Genesis)
+# Autor: Vetra System
+# Descrição: Dispatcher síncrono. Recebe Webhook, normaliza e salva no DB.
+# ---------------------------------------------------------------------
+
 import json
 import logging
 import os

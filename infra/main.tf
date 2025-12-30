@@ -1,4 +1,9 @@
-# infra/main.tf
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - INFRASTRUCTURE AS CODE
+# Arquivo: infra/main.tf
+# Versão: 1.0 (Genesis)
+# Descrição: Configuração do Provider AWS e Terraform State.
+# ---------------------------------------------------------------------
 
 provider "aws" {
   region = "us-east-1" # ou sua região preferida (ex: sa-east-1 para SP)

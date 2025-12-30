@@ -1,4 +1,9 @@
-# infra/dynamo.tf
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - DATA LAYER
+# Arquivo: infra/dynamo.tf
+# Versão: 1.0 (Genesis)
+# Descrição: Definição das tabelas Mestra (Core) e Memória (Contexto) com Streams.
+# ---------------------------------------------------------------------
 
 resource "aws_dynamodb_table" "vetra_core" {
   name         = "VetraEvolution"

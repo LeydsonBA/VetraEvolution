@@ -1,4 +1,9 @@
-# infra/compute.tf
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - COMPUTE & NETWORKING
+# Arquivo: infra/compute.tf
+# Versão: 1.0 (Genesis)
+# Descrição: API Gateway (HTTP) e Lambda Handler (Dispatcher).
+# ---------------------------------------------------------------------
 
 # --- 1. PREPARAÇÃO DO CÓDIGO (ZIP) ---
 # O Terraform vai zipar sua pasta 'src' automaticamente

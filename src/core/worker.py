@@ -1,3 +1,12 @@
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - CORE LOGIC
+# Arquivo: src/core/worker.py
+# Versão: 1.0 (Genesis)
+# Autor: Vetra System
+# Descrição: Worker assíncrono puro. Realiza limpeza (Unmarshall) e logging.
+# ---------------------------------------------------------------------
+
 import json
 import logging
 import boto3

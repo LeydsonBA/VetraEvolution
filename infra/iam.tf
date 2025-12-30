@@ -1,4 +1,9 @@
-# infra/iam.tf
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - SECURITY LAYER
+# Arquivo: infra/iam.tf
+# Versão: 1.0 (Genesis)
+# Descrição: Roles e Políticas de permissão (Least Privilege) para Lambdas.
+# ---------------------------------------------------------------------
 
 resource "aws_iam_role" "vetra_lambda_role" {
   name = "VetraLambdaRole"

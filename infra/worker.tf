@@ -1,4 +1,9 @@
-# infra/worker.tf
+# ---------------------------------------------------------------------
+# VETRA EVOLUTION - ASYNC COMPUTE
+# Arquivo: infra/worker.tf
+# Versão: 1.0 (Genesis)
+# Descrição: Lambda Worker e mapeamento de eventos (Event Source) do DynamoDB.
+# ---------------------------------------------------------------------
 
 # 1. A Função Lambda Worker (O Gênio)
 resource "aws_lambda_function" "vetra_worker" {
