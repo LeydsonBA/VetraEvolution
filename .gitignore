@@ -1,0 +1,21 @@
+# .gitignore
+
+# Terraform (Ignorar estados e plugins locais)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# Python (Ignorar cache e ambientes virtuais)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# AWS & IDE (Ignorar zips gerados e configs do editor)
+*.zip
+.vscode/
+.idea/
+.DS_Store
